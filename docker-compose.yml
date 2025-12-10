@@ -1,0 +1,32 @@
+# ============================================
+# Sistema Experto Epidemiológico
+# Docker Compose Configuration
+# ============================================
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sistema-experto
+    ports:
+      - "5001:5001"
+    volumes:
+      # Persistir base de datos
+      - ./data:/app/data
+      # Montar código para desarrollo (opcional)
+      # - ./app:/app/app
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:5001/" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+# Volúmenes nombrados (opcional para producción)
+volumes:
+  expert_data:
+    driver: local

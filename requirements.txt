@@ -1,0 +1,9 @@
+python-fasthtml
+uvicorn
+numpy
+scipy
+networkx
+scikit-fuzzy
+pydantic
+python-multipart
+fastlite

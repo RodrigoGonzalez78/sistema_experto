@@ -1,0 +1,44 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv
+venv/
+ENV/
+env/
+
+# Database files (will be created fresh or mounted as volume)
+*.db
+*.db-shm
+*.db-wal
+
+# Session keys
+.sesskey
+
+# IDE
+.vscode/
+.idea/
+
+# Docker
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# Documentation
+README.md
+docs/
+
+# Tests
+tests/
+pytest.ini
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db
