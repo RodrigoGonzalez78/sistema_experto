@@ -2,8 +2,8 @@
 # Sistema Experto Epidemiológico - Dockerfile
 # ============================================
 
-# Imagen base de Python
-FROM python:3.11-slim
+# Imagen base Python 3.10 (compatibilidad con fasthtml y experta)
+FROM python:3.10-slim
 
 # Metadatos
 LABEL maintainer="Sistema Experto"
@@ -28,9 +28,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Copiar requirements primero (cache de Docker)
 COPY requirements.txt .
 
-# Instalar dependencias Python
+# Instalar dependencias Python + parche para frozendict (Python 3.10+ compatibility)
 RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+    && pip install --no-cache-dir -r requirements.txt \
+    && python -c "import collections; collections.Mapping = collections.abc.Mapping" || true \
+    && sed -i 's/collections.Mapping/collections.abc.Mapping/g' /usr/local/lib/python3.10/site-packages/frozendict/__init__.py 2>/dev/null || true
 
 # Copiar código de la aplicación
 COPY app/ ./app/

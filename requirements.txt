@@ -7,3 +7,9 @@ scikit-fuzzy
 pydantic
 python-multipart
 fastlite
+experta
+pandas
+# Torch CPU-only (evita descargar CUDA ~800MB)
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
+pgmpy
